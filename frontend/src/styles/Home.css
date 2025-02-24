@@ -1,0 +1,11 @@
+.available-doctors {
+    font-size: 22px;
+    font-weight: 500;
+    color: #2c3e50;
+    text-align: left;
+    margin: 15px 0;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #27ae60;
+    display: inline-block;
+  }
+  

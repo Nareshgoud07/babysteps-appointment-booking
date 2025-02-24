@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.main-head {
+  font-size: 32px;       
+  font-weight: bold;     
+  color: #2c3e50;       
+  text-transform: uppercase; 
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+  margin-top: 20px;      
+  padding: 10px 0;       
+  border-bottom: 3px solid #3498db; 
+}

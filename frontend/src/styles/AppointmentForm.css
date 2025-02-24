@@ -1,0 +1,13 @@
+.appointment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+  }
+  .appointment-form label {
+    font-weight: bold;
+  }
+  .appointment-form input, .appointment-form select, .appointment-form button {
+    padding: 8px;
+  }
+  
