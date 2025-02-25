@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import AppointmentForm from "../components/AppointmentForm";
+import '../styles/BookAppointment.css'
 
 class BookAppointment extends Component {
   render() {
-    const doctorId = window.location.pathname.split("/").pop(); // Get doctorId from URL
-
+    const doctorId = window.location.pathname.split("/").pop();
     return (
-      <div>
-        <h2>Book an Appointment</h2>
+      <div className="appointment-container">
+        <h2 className="appointment-heading">Book an Appointment</h2>
         <AppointmentForm doctorId={doctorId} />
       </div>
     );

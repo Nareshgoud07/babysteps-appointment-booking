@@ -1,52 +1,107 @@
 import React, { Component } from "react";
+import { bookAppointment } from "../services/api";
+import "../styles/AppointmentForm.css";
 
 class AppointmentForm extends Component {
   state = {
     patientName: "",
     appointmentType: "",
+    notes: "",
+    isSubmitting: false,
   };
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Appointment booked with Doctor ID: ${this.props.doctorId}`);
+
+    const { doctorId, date, time } = this.props;
+    const { patientName, appointmentType, notes } = this.state;
+
+    if (!patientName || !appointmentType) {
+      alert("Please fill all required fields.");
+      return;
+    }
+    this.setState({ isSubmitting: true });
+    this.setState({
+      patientName: "",
+      appointmentType: "",
+      notes: "",
+    });
+
+    alert('Appointment booked Successfully')
+
+    
+
+    
+    const response = await bookAppointment({
+        doctorId,
+        date,
+        time,
+        patientName,
+        appointmentType,
+        notes,
+    });
+
+      /*if (response.success) {
+        alert("Appointment booked successfully!");
+        this.setState({
+          patientName: "",
+          appointmentType: "",
+          notes: "",
+        });
+      }
+      */
+      
+    
   };
 
   render() {
+    const { patientName, appointmentType, notes, isSubmitting } = this.state;
+
     return (
-      <form onSubmit={this.handleSubmit} className="mt-3">
-        <div className="form-group">
-          <label>Patient Name:</label>
+      <div className="appointment-container">
+    
+        <form className="appointment-form" onSubmit={this.handleSubmit}>
           <input
             type="text"
-            className="form-control"
             name="patientName"
-            value={this.state.patientName}
+            placeholder="Patient Name"
+            value={patientName}
             onChange={this.handleChange}
             required
           />
-        </div>
-        <div className="form-group mt-2">
-          <label>Appointment Type:</label>
           <select
-            className="form-control"
             name="appointmentType"
-            value={this.state.appointmentType}
+            value={appointmentType}
             onChange={this.handleChange}
             required
           >
-            <option value="">Select Type</option>
+            <option value="">Select Appointment Type</option>
             <option value="Routine Check-Up">Routine Check-Up</option>
             <option value="Ultrasound">Ultrasound</option>
+            <option value="Blood Test">Blood Test</option>
+            <option value="X-Ray">X-Ray</option>
+            <option value="MRI Scan">MRI Scan</option>
+            <option value="Dental Check-Up">Dental Check-Up</option>
+            <option value="Eye Examination">Eye Examination</option>
+            <option value="General Consultation">General Consultation</option>
+            <option value="Physiotherapy">Physiotherapy</option>
+            <option value="Vaccination">Vaccination</option>
           </select>
-        </div>
-        <button type="submit" className="btn btn-success mt-3">
-          Book Appointment
-        </button>
-      </form>
+          <textarea
+            name="notes"
+            placeholder="Additional Notes"
+            value={notes}
+            onChange={this.handleChange}
+          ></textarea>
+          <button type="submit" className="book-btn" disabled={isSubmitting}>
+            {isSubmitting ? "Book Appointment" : "Book Appointment"}
+          </button>
+        </form>
+      </div>
     );
   }
 }

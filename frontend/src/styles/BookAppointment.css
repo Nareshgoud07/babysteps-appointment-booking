@@ -1,0 +1,25 @@
+
+
+.appointment-heading {
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+    margin: 30px 0;
+    padding-bottom: 10px;
+    color: #2c3e50; 
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    position: relative;
+}
+
+.appointment-heading::before {
+    content: "";
+    width: 120px;
+    height: 4px;
+    background-color: #e74c3c;
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}

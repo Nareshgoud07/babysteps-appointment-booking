@@ -1,32 +1,33 @@
-const BASE_URL = "http://localhost:5000"; // Change this if backend is hosted
 
-export const fetchDoctors = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/doctors`);
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching doctors:", error);
-  }
+const API_URL = "http://localhost:5000/";
+
+export const getDoctors = async () => {
+  const res = await fetch(`${API_URL}doctors`);
+  const data = await res.json();
+  return data;
 };
 
-export const fetchAvailableSlots = async (doctorId, date) => {
-  try {
-    const response = await fetch(`${BASE_URL}/doctors/${doctorId}/slots?date=${date}`);
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching slots:", error);
-  }
+
+export const getDoctorSlots = async (doctorId, date) => {
+  const res = await fetch(`${API_URL}/doctors/${doctorId}/slots?date=${date}`);
+  const data = await res.json();
+  return data;
 };
 
-export const bookAppointment = async (appointmentData) => {
-  try {
-    const response = await fetch(`${BASE_URL}/appointments`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(appointmentData),
-    });
-    return await response.json();
-  } catch (error) {
-    console.error("Error booking appointment:", error);
-  }
+export const bookAppointment = async (data) => {
+  const res = await fetch(`${API_URL}/appointments`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  return res.json();
+};
+
+export const getAppointments = async () => {
+  const res = await fetch(`${API_URL}/appointments`);
+  return res.json();
+};
+
+export const cancelAppointment = async (id) => {
+  await fetch(`${API_URL}/appointments/${id}`, { method: "DELETE" });
 };
